@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
+import { PromoContextProvider } from '../../context/PromoContext';
 
 import promoBack from '../../img/promo.png';
 
@@ -39,16 +40,20 @@ const Text = styled.p`
 const Promo = () => {
   return (
     <Container>
-      <PromoField>
-        <Title>Введите ваш номер мобильного телефона</Title>
-        <PhoneInput />
-        <Text>и с Вами свяжется наш менеждер для дальнейшей консультации</Text>
-        <NumField />
-        <SubmitButton />
-        {/* <Form /> */}
-      </PromoField>
-      <CloseButton />
-      <QrImg />
+      <PromoContextProvider>
+        <PromoField>
+          <Title>Введите ваш номер мобильного телефона</Title>
+          <PhoneInput />
+          <Text>
+            и с Вами свяжется наш менеждер для дальнейшей консультации
+          </Text>
+          <NumField />
+          <SubmitButton />
+          {/* <Form /> */}
+        </PromoField>
+        <CloseButton />
+        <QrImg />
+      </PromoContextProvider>
     </Container>
   );
 };

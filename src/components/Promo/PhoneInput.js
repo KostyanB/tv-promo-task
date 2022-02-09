@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
+import { PromoContext } from '../../context';
 import env from '../../env.json';
 import maskPhone from '../../helpers/maskPhone';
 
-const { mainTextColor } = env.colors;
+const { mainTextColor, errorColor } = env.colors;
 
 const Input = styled.input.attrs(props => ({
   placeholder: props.holder,
@@ -21,20 +22,28 @@ const Input = styled.input.attrs(props => ({
   &::placeholder {
     color: ${mainTextColor};
   }
-  &.valid {
-  }
+
   &.novalid {
+    color: ${errorColor};
   }
 `;
 
 const PhoneInput = () => {
   const phoneMask = env.phoneMask;
+  const {
+    phoneValue: { phoneValue, setPhoneValue },
+    validateInputs: { validate, isValidPhone },
+  } = useContext(PromoContext);
   const inputRef = useRef(null);
+
   useEffect(() => {
     maskPhone(inputRef.current, phoneMask);
   }, []);
 
-  const handleValidate = () => {};
+  const handleValidate = () => {
+    setPhoneValue(inputRef.current.value);
+    validate(inputRef.current);
+  };
 
   return (
     <form id="promo-form">
@@ -46,7 +55,8 @@ const PhoneInput = () => {
         onChange={handleValidate}
         onBlur={handleValidate}
         onInput={handleValidate}
-        // className={isValid ? 'valid' : 'novalid'}
+        value={phoneValue}
+        className={!isValidPhone && 'novalid'}
       />
     </form>
   );
