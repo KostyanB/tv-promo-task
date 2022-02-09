@@ -37,7 +37,7 @@ const Button = styled.button.attrs(props => ({
   align-items: center;
   height: 52px;
   background-color: ${props => props?.styles?.btnBack || mainBtnBack};
-  border: 1px solid ${props => props?.styles?.btnBorder || mainBtnBorder};
+  border: 2px solid ${props => props?.styles?.btnBorder || mainBtnBorder};
   font-weight: 500;
   color: ${props => props?.styles?.btnText || mainBtnText};
   grid-area: ${props => (props.area ? props.area : '')};

@@ -203,11 +203,6 @@ export const GlobalStyle = createGlobalStyle`
         text-transform: inherit;
     }
 
-    [type="checkbox"] {
-        -webkit-appearance: checkbox;
-            appearance: checkbox;
-    }
-
     [type="radio"] {
         -webkit-appearance: radio;
             appearance: radio;

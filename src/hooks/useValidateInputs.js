@@ -5,7 +5,7 @@ const useValidateInputs = () => {
   const phoneMask = env.phoneMask;
   const [isValidInputs, setIsValidInputs] = useState(false);
   const [isValidPhone, setIsValidPhone] = useState(false);
-  const [isValidCheck, setIsValidCheck] = useState(true);
+  const [isValidCheck, setIsValidCheck] = useState(false);
 
   const checkAllInputs = () => {
     if (isValidPhone && isValidCheck) {
@@ -18,8 +18,7 @@ const useValidateInputs = () => {
   const getPrefix = str => str.split('(')[0].trim();
 
   const validateCheck = checkbox => {
-    checkbox.checked ? setIsValidCheck(true) : setIsValidCheck(false);
-    console.log('checkbox.checked: ', checkbox.checked);
+    setIsValidCheck(checkbox.checked);
     checkAllInputs();
   };
 
