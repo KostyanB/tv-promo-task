@@ -10,11 +10,16 @@ const Btn = styled(Button)`
 const SubmitButton = () => {
   const [disableSubmit, setDisableSubmit] = useState(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = e => {
+    e.preventDefault();
     console.log('submit');
   };
   return (
-    <Btn disable={disableSubmit} onClick={handleSubmit}>
+    <Btn
+      disable={disableSubmit}
+      type="submit"
+      form="promo-form"
+      onClick={handleSubmit}>
       ПОДТВЕРДИТЬ НОМЕР
     </Btn>
   );

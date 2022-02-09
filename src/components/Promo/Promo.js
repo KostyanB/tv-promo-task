@@ -1,11 +1,12 @@
 import React from 'react';
-import env from '../../env.json';
 import styled from 'styled-components';
+import env from '../../env.json';
 
 import promoBack from '../../img/promo.png';
 
-import Title from '../Styled/Ttile';
 import CloseButton from './CloseButton';
+import Title from '../Styled/Title';
+import PhoneInput from './PhoneInput';
 import NumField from './NumField';
 import SubmitButton from './SubmitButton';
 import QrImg from '../Styled/QrImg';
@@ -40,6 +41,7 @@ const Promo = () => {
     <Container>
       <PromoField>
         <Title>Введите ваш номер мобильного телефона</Title>
+        <PhoneInput />
         <Text>и с Вами свяжется наш менеждер для дальнейшей консультации</Text>
         <NumField />
         <SubmitButton />
