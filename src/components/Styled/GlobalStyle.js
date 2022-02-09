@@ -6,43 +6,35 @@ const { transitionDuration } = env;
 export const GlobalStyle = createGlobalStyle`
     /* fonts */
     @font-face {
-        font-family: 'San Francisco';
+        font-family: 'Roboto';
+        src: local('Roboto'), local('Roboto-Regular'),
+            url('../fonts/Roboto.woff2') format('woff2'),
+            url('../fonts/Roboto.woff') format('woff');
         font-weight: 400;
-        src: url('../fonts/SFProDisplay-Regular.woff2') format('woff2'),
-            url('../fonts/SFProDisplay-Regular.woff') format('woff');
         font-display: swap;
     }
 
     @font-face {
-        font-family: 'San Francisco';
-        font-weight: 300;
-        src: url('../fonts/SFProDisplay-Thin.woff2') format('woff2'),
-            url('../fonts/SFProDisplay-Thin.woff') format('woff');
+        font-family: 'Roboto';
+        src: local('Roboto Medium'), local('Roboto-Medium'),
+            url('../fonts/Robotomedium.woff2') format('woff2'),
+            url('../fonts/Robotomedium.woff') format('woff');
+        font-weight: 500;
+        font-style: normal;
         font-display: swap;
     }
 
     @font-face {
-        font-family: 'San Francisco';
-        font-weight: 600;
-        src: url('../fonts/SFProDisplay-Semibold.woff2') format('woff2'),
-            url('../fonts/SFProDisplay-Semibold.woff') format('woff');
-        font-display: swap;
-    }
-
-    @font-face {
-        font-family: 'San Francisco';
+        font-family: 'Roboto';
+        src: local('Roboto Bold'), local('Roboto-Bold'),
+            url('../fonts/Robotobold.woff2') format('woff2'),
+            url('../fonts/Robotobold.woff') format('woff');
         font-weight: 700;
-        src: url('../fonts/SFProDisplay-Bold.woff2') format('woff2'),
-            url('../fonts/SFProDisplay-Bold.woff') format('woff');
+        font-style: normal;
         font-display: swap;
     }
     /* reset styles */
-    :root {
-        -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        /* fix place for scroll */
-        /* scrollbar-gutter: stable; */
-    }
+
 
         /* Document */
     html {
@@ -66,7 +58,7 @@ export const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
         margin: 0;
         background-color: #fff;
-        font-family: 'San Francisco', Arial, sans-serif;
+        font-family: 'Roboto', Arial, sans-serif;
         font-size: 16px;
         font-weight: 400;
         line-height: 1;
@@ -74,17 +66,6 @@ export const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
 
     }
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-        background-color: ${backgroundColor};
-    }
-    ::-webkit-scrollbar-thumb {
-        background-color: ${hoverColor};
-        border-radius: 100px;
-    }
-
     main {
         display: block;
     }
@@ -349,14 +330,22 @@ export const GlobalStyle = createGlobalStyle`
         outline: 0;
         outline-offset: 0;
     }
-    /*
-    * компенсация смещения блоков при анимированном роутинге
-    * из-за одновременного рендеринга 2-х DOM-элементов
-    * в AnimatedRoutes в transition animated.div добавлен
-    * стиль 'grid-area: 1/-1'
-    */
-    /*#root {
-        display: grid;
-    }*/
+
+    #root {
+        -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        width: 1280px;
+        height: 720px;
+        margin: auto;
+        /* fix place for scroll */
+        /* scrollbar-gutter: stable; */
+        /*
+        * компенсация смещения блоков при анимированном роутинге
+        * из-за одновременного рендеринга 2-х DOM-элементов
+        * в AnimatedRoutes в transition animated.div добавлен
+        * стиль 'grid-area: 1/-1'
+        */
+        /* display: grid; */
+    }
 
 `;
