@@ -9,6 +9,7 @@ import CloseButton from './CloseButton';
 import Title from '../Styled/Title';
 import PhoneInput from './PhoneInput';
 import NumField from './NumField';
+import PromoCheck from './PromoCheck';
 import SubmitButton from './SubmitButton';
 import QrImg from '../Styled/QrImg';
 
@@ -48,8 +49,8 @@ const Promo = () => {
             и с Вами свяжется наш менеждер для дальнейшей консультации
           </Text>
           <NumField />
+          <PromoCheck />
           <SubmitButton />
-          {/* <Form /> */}
         </PromoField>
         <CloseButton />
         <QrImg />
