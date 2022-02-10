@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import env from '../env.json';
+import maskPhone from '../helpers/maskPhone';
 
 const useValidateInputs = () => {
   const phoneMask = env.phoneMask;
@@ -22,7 +23,7 @@ const useValidateInputs = () => {
     checkAllInputs();
   };
 
-  const validateTel = value => {
+  const validatePhone = value => {
     const maskPrefix = getPrefix(phoneMask);
     const inputPrefix = getPrefix(value);
 
@@ -40,7 +41,11 @@ const useValidateInputs = () => {
       inputValue = input.value;
 
     if (inputType === 'checkbox') validateCheck(input);
-    if (inputType === 'tel') validateTel(inputValue);
+    if (inputType === 'tel') {
+      // console.log('phone');
+      // maskPhone(input, phoneMask);
+      validatePhone(inputValue);
+    }
   };
 
   return {

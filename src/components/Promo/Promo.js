@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef, createRef, useEffect } from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
 import { PromoContextProvider } from '../../context/PromoContext';
+import maskPhone from '../../helpers/maskPhone';
 
 import promoBack from '../../img/promo.png';
 
@@ -39,22 +40,31 @@ const Text = styled.p`
 `;
 
 const Promo = () => {
+  const phoneMask = env.phoneMask;
+  const phoneRef = createRef();
+  // const phoneRef = useRef(null);
+  useEffect(() => {
+    maskPhone(phoneRef.current, phoneMask);
+  }, []);
+
   return (
     <Container>
-      <PromoContextProvider>
-        <PromoField>
-          <Title>Введите ваш номер мобильного телефона</Title>
-          <PhoneInput />
+      <PromoField>
+        <Title>Введите ваш номер мобильного телефона</Title>
+        <PromoContextProvider>
+          <form id="promo-form">
+            <PhoneInput ref={phoneRef} />
+          </form>
           <Text>
             и с Вами свяжется наш менеждер для дальнейшей консультации
           </Text>
-          <NumField />
+          <NumField phone={phoneRef} />
           <PromoCheck />
           <SubmitButton />
-        </PromoField>
-        <CloseButton />
-        <QrImg />
-      </PromoContextProvider>
+        </PromoContextProvider>
+      </PromoField>
+      <CloseButton />
+      <QrImg />
     </Container>
   );
 };

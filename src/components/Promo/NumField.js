@@ -16,13 +16,19 @@ const Field = styled.div`
   padding-bottom: 20px;
 `;
 
-const NumField = () => {
+const NumField = ({ phone }) => {
   const digArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const addNum = new CustomEvent('input');
 
   return (
     <Field>
       {digArr.map(item => (
-        <NumFieldButton key={item} value={item} area={`num${item}`} />
+        <NumFieldButton
+          key={item}
+          value={item}
+          area={`num${item}`}
+          phone={phone}
+        />
       ))}
       <NumFieldButton value="СТЕРЕТЬ" area="del" />
     </Field>

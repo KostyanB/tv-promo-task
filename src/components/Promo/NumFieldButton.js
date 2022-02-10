@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
+import maskPhone from '../../helpers/maskPhone';
+import { PromoContext } from '../../context';
 import Button from '../Styled/Buttons';
 
 const {
@@ -13,14 +15,10 @@ const {
   numBtnActiveText,
 } = env.colors.numBtnColors;
 
-// const NumBtn = styled(NumFieldButton)`
-//   /* grid-area: ${props => (props.area ? props.area : '')}; */
-//   /* width: 88px; */
-//   width: 100%;
-// `;
-
-const NumFieldButton = ({ value, area }) => {
-  // const area = `num${value}`;
+const NumFieldButton = ({ value, area, phone }) => {
+  const {
+    validateInputs: { validate },
+  } = useContext(PromoContext);
   const styles = {
     btnBack: numBtnBack,
     btnBorder: numBtnBorder,
@@ -30,9 +28,24 @@ const NumFieldButton = ({ value, area }) => {
     btnHoverText: numBtnHoverText,
     btnActiveText: numBtnActiveText,
   };
-  const addSymToInput = () => {};
+
+  const generateInputEvent = (dataValue = '') => {
+    const event = new InputEvent('addNum', {
+      data: dataValue,
+      // inputType: 'insertText',
+    });
+    document.dispatchEvent(event);
+  };
 
   const delSymFromInput = () => {};
+
+  const addSymToInput = () => {
+    !phone.current.value && generateInputEvent();
+
+    phone.current.value += value;
+    generateInputEvent(value.toString());
+    validate(phone.current);
+  };
 
   const handleNumButton = () => {
     if (typeof value === 'number') {

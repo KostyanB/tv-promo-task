@@ -18,6 +18,8 @@ const SubmitButton = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    const form = document.form;
+    console.log('form: ', form);
     console.log('submit');
   };
 

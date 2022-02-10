@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useEffect, useRef, useContext, forwardRef } from 'react';
 import styled from 'styled-components';
 import { PromoContext } from '../../context';
 import env from '../../env.json';
@@ -28,37 +28,40 @@ const Input = styled.input.attrs(props => ({
   }
 `;
 
-const PhoneInput = () => {
+const PhoneInput = forwardRef((props, ref) => {
   const phoneMask = env.phoneMask;
   const {
     phoneValue: { phoneValue, setPhoneValue },
     validateInputs: { validate, isValidPhone },
   } = useContext(PromoContext);
-  const inputRef = useRef(null);
+  // const inputRef = useRef(null);
 
-  useEffect(() => {
-    maskPhone(inputRef.current, phoneMask);
-  }, []);
+  // useEffect(() => {
+  //   // maskPhone(inputRef.current, phoneMask);
+  //   maskPhone(ref.current, phoneMask);
 
   const handleValidate = () => {
-    setPhoneValue(inputRef.current.value);
-    validate(inputRef.current);
+    // setPhoneValue(inputRef.current.value);
+    // validate(inputRef.current);
+    setPhoneValue(ref.current.value);
+    validate(ref.current);
   };
 
   return (
-    <form id="promo-form">
-      <Input
-        ref={inputRef}
-        type="tel"
-        name="promo-phone"
-        holder={phoneMask}
-        onChange={handleValidate}
-        onBlur={handleValidate}
-        onInput={handleValidate}
-        value={phoneValue}
-        className={!isValidPhone && 'novalid'}
-      />
-    </form>
+    <Input
+      // ref={inputRef}
+      ref={ref}
+      type="tel"
+      name="promo-phone"
+      holder={phoneMask}
+      onChange={handleValidate}
+      onBlur={handleValidate}
+      onInput={handleValidate}
+      // value={phoneValue}
+      className={!isValidPhone && 'novalid'}>
+      {props.children}
+    </Input>
   );
-};
+});
+
 export default PhoneInput;
