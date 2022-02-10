@@ -4,7 +4,7 @@ import env from '../../env.json';
 import { PromoContextProvider } from '../../context/PromoContext';
 import maskPhone from '../../helpers/maskPhone';
 
-import promoBack from '../../img/promo.png';
+import promoBack from '../../img/promo.webp';
 
 import CloseButton from './CloseButton';
 import Title from '../Styled/Title';

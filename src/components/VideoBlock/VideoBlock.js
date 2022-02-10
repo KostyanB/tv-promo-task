@@ -4,8 +4,8 @@ import { Context } from '../../context';
 import { Link } from 'react-router-dom';
 
 import env from '../../env.json';
-import videoBack from '../../img/video.png';
-import bannerBack from '../../img/banner.png';
+import videoBack from '../../img/video.webp';
+import bannerBack from '../../img/banner.webp';
 import YouTube from 'react-youtube';
 // import Button from '../Styled/Buttons';
 

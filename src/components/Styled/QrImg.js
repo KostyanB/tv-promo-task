@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import qrImg from '../../img/promo_qr.png';
+import qrImg from '../../img/promo_qr.webp';
 
 const Img = styled.img`
   grid-area: 1/-1;

@@ -3,13 +3,14 @@ import { GlobalStyle } from './components/Styled/GlobalStyle';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ContextProvider } from './context';
 import AnimaRoutes from './components/AnimaRoutes';
+import Preloader from './components/Styled/Preloader';
 
 import Promo from './components/Promo';
 import VideoBlock from './components/VideoBlock';
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading... </div>}>
+    <Suspense fallback={<Preloader />}>
       <GlobalStyle />
       <ContextProvider>
         {/* <Promo /> */}
