@@ -1,12 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
+import { Context } from '../../context';
+import { Link } from 'react-router-dom';
+
 import env from '../../env.json';
 import videoBack from '../../img/video.png';
 import bannerBack from '../../img/banner.png';
 import YouTube from 'react-youtube';
-import Button from '../Styled/Buttons';
+// import Button from '../Styled/Buttons';
 
-const { transitionDuration, bannerDelay } = env;
+const {
+  transitionDuration,
+  bannerDelay,
+  colors: {
+    mainBtnColors: {
+      mainBtnBack,
+      mainBtnBorder,
+      mainBtnText,
+      mainBtnHoverBack,
+      mainBtnHoverBorder,
+      mainBtnHoverText,
+      mainBtnActiveText,
+    },
+  },
+} = env;
 
 const Container = styled.div`
   position: relative;
@@ -18,12 +35,11 @@ const Container = styled.div`
   background-size: cover;
   overflow: hidden;
 `;
-
-const Player = styled.div`
-  grid-area: 1/-1;
-  width: 100%;
-  height: 100%;
-`;
+// const Player = styled.div`
+//   grid-area: 1/-1;
+//   width: 100%;
+//   height: 100%;
+// `;
 const Banner = styled.div`
   width: 251px;
   height: 357px;
@@ -46,14 +62,42 @@ const Banner = styled.div`
   background-size: cover;
   z-index: 5;
 `;
-const BannerBtn = styled(Button)`
+// const BannerBtn = styled(Button)`
+//   width: 156px;
+// `;
+
+const Btn = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 156px;
+  height: 52px;
+  background-color: ${mainBtnBack};
+  border: 2px solid ${mainBtnBorder};
+  font-weight: 500;
+  color: ${mainBtnText};
+  grid-area: ${props => (props.area ? props.area : '')};
+
+  &:hover,
+  &:active {
+    background-color: ${mainBtnHoverBack};
+    border: 1px solid ${mainBtnHoverBorder};
+  }
+
+  &:hover {
+    color: ${mainBtnHoverText};
+  }
+  &:active {
+    color: ${mainBtnActiveText};
+  }
 `;
 
 const VideoBlock = () => {
   const [player, setPlayer] = useState(null);
   const [showBanner, setShowBanner] = useState(false);
-  const [startTime, setStartTime] = useState();
+  const {
+    startPlayTime: { startPlayTime, setStartPlayTime },
+  } = useContext(Context);
 
   const opts = {
     width: '1280',
@@ -64,23 +108,23 @@ const VideoBlock = () => {
   };
 
   useEffect(() => {
-    // if (player) {
-    //   player.seekTo(startTime);
-    //   player.playVideo();
-    // }
+    if (player) {
+      player.seekTo(startPlayTime);
+      player.playVideo();
+    }
     setTimeout(() => setShowBanner(true), bannerDelay);
-  }, [player, startTime]);
+  }, [player, startPlayTime]);
 
   const handleReadyPlayer = e => {
-    console.log('e.target: ', e.target);
-    e.target.playVideo();
+    // console.log('e.target: ', e.target);
+    // e.target.playVideo();
     setPlayer(e.target);
   };
 
   const handleBanner = () => {
-    console.log('player: ', player);
+    // console.log('player: ', player);
     const currentTime = player.getCurrentTime();
-    setStartTime(currentTime);
+    setStartPlayTime(currentTime);
     player.pauseVideo();
   };
 
@@ -90,7 +134,10 @@ const VideoBlock = () => {
       <YouTube videoId="M7FIvfx5J10" opts={opts} onReady={handleReadyPlayer} />
       {/* </Player> */}
       <Banner show={showBanner}>
-        <BannerBtn onClick={handleBanner}>OK</BannerBtn>
+        {/* <BannerBtn onClick={handleBanner}>OK</BannerBtn> */}
+        <Btn to="/promo" onClick={handleBanner}>
+          OK
+        </Btn>
       </Banner>
     </Container>
   );
