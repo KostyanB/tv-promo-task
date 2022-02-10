@@ -18,7 +18,6 @@ const Field = styled.div`
 
 const NumField = ({ phone }) => {
   const digArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const addNum = new CustomEvent('input');
 
   return (
     <Field>
@@ -30,7 +29,7 @@ const NumField = ({ phone }) => {
           phone={phone}
         />
       ))}
-      <NumFieldButton value="СТЕРЕТЬ" area="del" />
+      <NumFieldButton value="СТЕРЕТЬ" area="del" phone={phone} />
     </Field>
   );
 };

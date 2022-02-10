@@ -41,11 +41,7 @@ const useValidateInputs = () => {
       inputValue = input.value;
 
     if (inputType === 'checkbox') validateCheck(input);
-    if (inputType === 'tel') {
-      // console.log('phone');
-      // maskPhone(input, phoneMask);
-      validatePhone(inputValue);
-    }
+    if (inputType === 'tel') validatePhone(inputValue);
   };
 
   return {

@@ -37,21 +37,30 @@ const NumFieldButton = ({ value, area, phone }) => {
     document.dispatchEvent(event);
   };
 
-  const delSymFromInput = () => {};
+  const delSymFromInput = input => {
+    if (!input.value) return;
 
-  const addSymToInput = () => {
-    !phone.current.value && generateInputEvent();
+    const newValue = input.value.slice(0, input.value.length - 1);
 
-    phone.current.value += value;
+    input.value = newValue;
+    generateInputEvent(newValue);
+    validate(input);
+  };
+
+  const addSymToInput = input => {
+    !input.value && generateInputEvent();
+
+    input.value += value;
     generateInputEvent(value.toString());
-    validate(phone.current);
+    validate(input);
   };
 
   const handleNumButton = () => {
+    const input = phone.current;
     if (typeof value === 'number') {
-      addSymToInput();
+      addSymToInput(input);
     } else {
-      delSymFromInput();
+      delSymFromInput(input);
     }
   };
 
