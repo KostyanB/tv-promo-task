@@ -37,15 +37,12 @@ const maskPhone = (elem, masked = '+7 (___) ___-__-__') => {
   };
 
   const runMask = function (event) {
-    console.log('event: ', event);
-    console.log('elem.value: ', elem.value);
     // const keyCode = event.keyCode;
     const keyCode = Number(event.data);
     let index = 0;
 
     // let newValue = createNewValue(this.value, index);
     let newValue = createNewValue(elem.value, index);
-    console.log('newValue: ', newValue);
 
     index = newValue.indexOf('_');
 

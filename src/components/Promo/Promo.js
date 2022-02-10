@@ -22,6 +22,7 @@ const Container = styled.div`
   display: grid;
   background-image: url(${promoBack});
   background-repeat: no-repeat;
+  background-size: cover;
 `;
 const PromoField = styled.div`
   width: 380px;
