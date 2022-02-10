@@ -34,14 +34,28 @@ const NumFieldButton = ({ value, area, phone }) => {
     document.dispatchEvent(event);
   };
 
+  const chekSym = sym => [' ', '-', ')'].includes(sym);
+
+  const createNewValue = val => {
+    let i = 1;
+    let last = val.at(-i);
+
+    while (chekSym(last)) {
+      i++;
+      last = val.at(-i);
+    }
+
+    return val.slice(0, val.length - i);
+  };
+
   const delSymFromInput = input => {
-    if (!input.value) return;
+    const currentValue = input.value;
 
-    const newValue = input.value.slice(0, input.value.length - 1);
+    if (!currentValue) return;
 
+    const newValue = createNewValue(currentValue);
     input.value = newValue;
     generateInputEvent(newValue);
-    validate(input);
   };
 
   const addSymToInput = input => {
@@ -49,7 +63,6 @@ const NumFieldButton = ({ value, area, phone }) => {
 
     input.value += value;
     generateInputEvent(value.toString());
-    validate(input);
   };
 
   const handleNumButton = () => {
@@ -59,6 +72,7 @@ const NumFieldButton = ({ value, area, phone }) => {
     } else {
       delSymFromInput(input);
     }
+    validate(input);
   };
 
   return (
