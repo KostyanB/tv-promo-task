@@ -1,4 +1,4 @@
-import React, { useRef, createRef, useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
 import { PromoContextProvider } from '../../context/PromoContext';
@@ -9,7 +9,7 @@ import promoBack from '../../img/promo.png';
 import CloseButton from './CloseButton';
 import Title from '../Styled/Title';
 import PhoneInput from './PhoneInput';
-import NumField from './NumField';
+import NumField from '../NumField';
 import PromoCheck from './PromoCheck';
 import SubmitButton from './SubmitButton';
 import QrImg from '../Styled/QrImg';
@@ -42,7 +42,7 @@ const Text = styled.p`
 const Promo = () => {
   const phoneMask = env.phoneMask;
   const phoneRef = createRef();
-  // const phoneRef = useRef(null);
+
   useEffect(() => {
     maskPhone(phoneRef.current, phoneMask);
   }, []);
