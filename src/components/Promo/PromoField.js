@@ -1,43 +1,26 @@
-import React, { createRef, useRef, useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react';
 import { PromoContext } from '../../context';
 
-import PhoneInput from './PhoneInput';
-import NumField from '../NumField';
-import PromoCheck from './PromoCheck';
-import SubmitButton from './SubmitButton';
-
-const Text = styled.p`
-  font-size: 14px;
-  line-height: 16.41px;
-  text-align: center;
-`;
+import Title from '../Styled/Title';
+import PromoDataField from './PromoDataField';
+import PromoMessage from './PromoMessage';
+import Preloader from '../Styled/Preloader';
 
 const PromoField = () => {
-  const phoneRef = createRef();
-  const formRef = useRef(null);
   const {
-    sendData: { sendData },
-    validateInputs: { isValidInputs },
+    sendData: { status, error },
   } = useContext(PromoContext);
-
-  const sendForm = e => {
-    e.preventDefault();
-    if (isValidInputs) {
-      const data = new FormData(formRef.current);
-      sendData(data);
-    }
-  };
 
   return (
     <>
-      <form id="promo-form" ref={formRef} onSubmit={sendForm}>
-        <PhoneInput ref={phoneRef} />
-      </form>
-      <Text>и с Вами свяжется наш менеждер для дальнейшей консультации</Text>
-      <NumField phone={phoneRef} />
-      <PromoCheck />
-      <SubmitButton />
+      {status === 'sending' && <Preloader />}
+      {(status === 'success' || status === 'rejected') && <PromoMessage />}
+      {!status && (
+        <>
+          <Title>Введите ваш номер мобильного телефона</Title>
+          <PromoDataField />
+        </>
+      )}
     </>
   );
 };

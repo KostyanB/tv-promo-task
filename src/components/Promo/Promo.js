@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
-import { PromoContextProvider, PromoContext } from '../../context';
-import useSendData from '../../hooks/useSendData';
+import { PromoContextProvider } from '../../context';
 import promoBack from '../../img/promo.webp';
 
 import CloseButton from './CloseButton';
-import Title from '../Styled/Title';
-import PromoField from './PromoField';
 import QrImg from '../Styled/QrImg';
+import PromoField from './PromoField';
 
 const { mainFill } = env.colors;
 
@@ -32,13 +30,9 @@ const PromoWrapper = styled.div`
 `;
 
 const Promo = () => {
-  const { status, error } = useSendData();
-  console.log('status: ', status);
-
   return (
     <Container>
       <PromoWrapper>
-        <Title>Введите ваш номер мобильного телефона</Title>
         <PromoContextProvider>
           <PromoField />
         </PromoContextProvider>
