@@ -8,7 +8,7 @@ import Preloader from '../Styled/Preloader';
 
 const PromoField = () => {
   const {
-    sendData: { status, error },
+    sendData: { status },
   } = useContext(PromoContext);
 
   return (

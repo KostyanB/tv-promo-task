@@ -1,5 +1,4 @@
 import React, { createRef, useRef, useContext } from 'react';
-import styled from 'styled-components';
 import { PromoContext } from '../../context';
 
 import PhoneInput from './PhoneInput';

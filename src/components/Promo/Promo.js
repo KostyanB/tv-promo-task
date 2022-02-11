@@ -31,15 +31,15 @@ const PromoWrapper = styled.div`
 
 const Promo = () => {
   return (
-    <Container>
-      <PromoWrapper>
-        <PromoContextProvider>
+    <PromoContextProvider>
+      <Container>
+        <PromoWrapper>
           <PromoField />
-        </PromoContextProvider>
-      </PromoWrapper>
-      <CloseButton />
-      <QrImg />
-    </Container>
+        </PromoWrapper>
+        <CloseButton />
+        <QrImg />
+      </Container>
+    </PromoContextProvider>
   );
 };
 export default Promo;

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { PromoContext } from '../../context';
 import env from '../../env.json';
-// import Button from '../Styled/Buttons';
 import { Link } from 'react-router-dom';
 import { CrossIcon } from '../Icons';
 
@@ -25,13 +25,14 @@ const Close = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${closeBtnBack};
+  background-color: ${props => (props.success ? closeBtnBorder : closeBtnBack)};
   border: 2px solid ${closeBtnBorder};
-  color: ${closeBtnText};
+  color: ${props => (props.success ? closeBtnBack : closeBtnText)};
 
   &:hover,
   &:active {
-    background-color: ${closeBtnHoverBack};
+    background-color: ${props =>
+      props.success ? closeBtnBorder : closeBtnHoverBack};
     border: 1px solid ${closeBtnHoverBorder};
   }
 
@@ -39,38 +40,17 @@ const Close = styled(Link)`
     color: ${closeBtnHoverText};
   }
   &:active {
-    color: ${closeBtnActiveText};
+    color: ${props => (props.success ? closeBtnBack : closeBtnActiveText)};
   }
 `;
 
-// const Btn = styled(Button)`
-//   width: 88px;
-//   grid-area: 1/-1;
-//   place-self: start end;
-//   margin-top: 20px;
-//   margin-right: 20px;
-// `;
-
 const CloseButton = () => {
-  // const styles = {
-  //   btnBack: closeBtnBack,
-  //   btnBorder: closeBtnBorder,
-  //   btnText: closeBtnText,
-  //   btnHoverBack: closeBtnHoverBack,
-  //   btnHoverBorder: closeBtnHoverBorder,
-  //   btnHoverText: closeBtnHoverText,
-  //   btnActiveText: closeBtnActiveText,
-  // };
-
-  // const handleClosePromo = () => {
-  //   console.log('close');
-  // };
+  const {
+    sendData: { status },
+  } = useContext(PromoContext);
 
   return (
-    // <Btn styles={styles} onClick={handleClosePromo}>
-    //   <CrossIcon />
-    // </Btn>
-    <Close to="/">
+    <Close to="/" success={status !== 'success' ? 'true' : undefined}>
       <CrossIcon />
     </Close>
   );
