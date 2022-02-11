@@ -16,19 +16,20 @@ const SubmitButton = () => {
 
   useEffect(() => setDisableSubmit(!isValidInputs), [isValidInputs]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = document.form;
-    console.log('form: ', form);
-    console.log('submit');
-  };
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   const form = document.form;
+  //   console.log('form: ', form);
+  //   console.log('submit');
+  // };
 
   return (
     <Btn
       disable={disableSubmit}
       type="submit"
       form="promo-form"
-      onClick={handleSubmit}>
+      // onClick={handleSubmit}
+    >
       ПОДТВЕРДИТЬ НОМЕР
     </Btn>
   );

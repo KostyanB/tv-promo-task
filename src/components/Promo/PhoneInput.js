@@ -36,9 +36,10 @@ const PhoneInput = forwardRef((props, ref) => {
   } = useContext(PromoContext);
   // const inputRef = useRef(null);
 
-  // useEffect(() => {
-  //   // maskPhone(inputRef.current, phoneMask);
-  //   maskPhone(ref.current, phoneMask);
+  useEffect(() => {
+    // maskPhone(inputRef.current, phoneMask);
+    maskPhone(ref.current, phoneMask);
+  }, [ref, phoneMask]);
 
   const handleValidate = () => {
     // setPhoneValue(inputRef.current.value);

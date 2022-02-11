@@ -23,6 +23,7 @@ const {
       mainBtnActiveText,
     },
   },
+  backend: { videoId },
 } = env;
 
 const Container = styled.div`
@@ -131,7 +132,7 @@ const VideoBlock = () => {
   return (
     <Container>
       {/* <Player> */}
-      <YouTube videoId="M7FIvfx5J10" opts={opts} onReady={handleReadyPlayer} />
+      <YouTube videoId={videoId} opts={opts} onReady={handleReadyPlayer} />
       {/* </Player> */}
       <Banner show={showBanner}>
         {/* <BannerBtn onClick={handleBanner}>OK</BannerBtn> */}
