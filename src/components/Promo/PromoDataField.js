@@ -21,7 +21,7 @@ const PromoDataField = () => {
       const form = formRef.current;
       const data = new FormData(form);
       sendData(data);
-      form.clear();
+      form.reset();
     }
   };
 
