@@ -17,11 +17,13 @@ const Label = styled.label`
   padding: 6px 10px;
   height: 52px;
 
+  cursor: default !important;
+
   & > input {
     width: 40px;
     height: 40px;
-    z-index: -1;
-    cursor: pointer;
+    z-index: -5;
+
     grid-area: 1/-1;
     place-self: start;
   }
@@ -49,9 +51,11 @@ const CheckField = styled.div`
   align-items: center;
   transition: 0.2s;
   background-color: transparent;
-  border: 2px solid;
+  border-style: solid;
   border-color: ${mainTextColor};
+  border-width: ${props => (props.isFocused ? '4px' : '2px')};
   color: ${mainTextColor};
+  cursor: pointer;
 
   & > svg {
     transform: ${props => (props.isChecked ? 'scale(1)' : 'scale(0)')};
@@ -65,24 +69,43 @@ const PromoCheck = () => {
     validateInputs: { validate },
   } = useContext(PromoContext);
   const [isChecked, setIsChecked] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const toggleCheck = () => setIsChecked(!isChecked);
+  const toggleCheck = () => {
+    const newCheck = !checkRef.current.checked;
+    setIsChecked(newCheck);
+    checkRef.current.checked = newCheck;
+  };
 
-  useEffect(() => {
-    checkRef.current.checked = isChecked;
-    validate(checkRef.current);
-  }, [isChecked, validate]);
+  const handleSetCheckByEnter = e => e.key === 'Enter' && toggleCheck();
+
+  const handleCheckWhenFocus = () => {
+    setIsFocused(true);
+    document.addEventListener('keyup', handleSetCheckByEnter);
+  };
+
+  const handleCheckWhenBlur = () => {
+    setIsFocused(false);
+    document.removeEventListener('keyup', handleSetCheckByEnter);
+  };
+
+  useEffect(() => validate(checkRef.current), [validate, checkRef]);
 
   return (
-    <Label htmlFor="promo-check" onClick={toggleCheck}>
+    <Label htmlFor="promo-check">
       <input
         ref={checkRef}
         type="checkbox"
         form="promo-form"
         name="promo-check"
+        onFocus={handleCheckWhenFocus}
+        onBlur={handleCheckWhenBlur}
       />
       <Agree>
-        <CheckField isChecked={isChecked}>
+        <CheckField
+          isChecked={isChecked}
+          isFocused={isFocused}
+          onClick={toggleCheck}>
           <CheckIcon name="Согласен" />
         </CheckField>
         <span>Согласие на обработку персональных данных</span>

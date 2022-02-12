@@ -29,13 +29,14 @@ const Close = styled(Link)`
   border: 2px solid ${closeBtnBorder};
   color: ${props => (props.success ? closeBtnBack : closeBtnText)};
 
+  &:focus,
   &:hover,
   &:active {
     background-color: ${props =>
       props.success ? closeBtnBorder : closeBtnHoverBack};
     border: 1px solid ${closeBtnHoverBorder};
   }
-
+  &:focus,
   &:hover {
     color: ${closeBtnHoverText};
   }

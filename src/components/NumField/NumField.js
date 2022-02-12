@@ -16,7 +16,7 @@ const Field = styled.div`
 `;
 
 const NumField = ({ phone }) => {
-  const digArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const digArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
   return (
     <Field>

@@ -78,13 +78,13 @@ const Btn = styled(Link)`
   font-weight: 500;
   color: ${mainBtnText};
   grid-area: ${props => (props.area ? props.area : '')};
-
+  &:focus,
   &:hover,
   &:active {
     background-color: ${mainBtnHoverBack};
     border: 1px solid ${mainBtnHoverBorder};
   }
-
+  &:focus,
   &:hover {
     color: ${mainBtnHoverText};
   }

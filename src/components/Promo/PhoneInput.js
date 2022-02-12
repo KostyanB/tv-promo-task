@@ -31,7 +31,7 @@ const Input = styled.input.attrs(props => ({
 const PhoneInput = forwardRef((props, ref) => {
   const phoneMask = env.phoneMask;
   const {
-    phoneValue: { phoneValue, setPhoneValue },
+    phoneValue: { setPhoneValue },
     validateInputs: { validate, isValidPhone },
   } = useContext(PromoContext);
   // const inputRef = useRef(null);

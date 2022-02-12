@@ -41,7 +41,7 @@ const Button = styled.button.attrs(props => ({
   font-weight: 500;
   color: ${props => props?.styles?.btnText || mainBtnText};
   grid-area: ${props => (props.area ? props.area : '')};
-
+  &:focus,
   &:hover,
   &:active {
     background-color: ${props =>
@@ -49,7 +49,7 @@ const Button = styled.button.attrs(props => ({
     border: 1px solid
       ${props => props?.styles?.btnHoverBorder || mainBtnHoverBorder};
   }
-
+  &:focus,
   &:hover {
     color: ${props => props?.styles?.btnHoverText || mainBtnHoverText};
   }
