@@ -340,7 +340,7 @@ export const GlobalStyle = createGlobalStyle`
         * в AnimatedRoutes в transition animated.div добавлен
         * стиль 'grid-area: 1/-1'
         */
-        display: grid;
+        /*display: grid;*/
     }
 
 `;

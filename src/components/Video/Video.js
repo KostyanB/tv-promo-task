@@ -93,7 +93,7 @@ const Btn = styled(Link)`
   }
 `;
 
-const VideoBlock = () => {
+const Video = () => {
   const [player, setPlayer] = useState(null);
   const [showBanner, setShowBanner] = useState(false);
   const {
@@ -143,7 +143,7 @@ const VideoBlock = () => {
     </Container>
   );
 };
-export default VideoBlock;
+export default Video;
 
 /* <iframe
   width="100%"

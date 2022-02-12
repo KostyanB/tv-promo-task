@@ -5,7 +5,7 @@ import { ContextProvider } from './context';
 
 import Preloader from './components/Styled/Preloader';
 import Promo from './components/Promo';
-import VideoBlock from './components/VideoBlock';
+import Video from './components/Video';
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
       <ContextProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<VideoBlock />} />
+            <Route path="/" element={<Video />} />
             <Route path="promo" element={<Promo />} />
           </Routes>
         </Router>
