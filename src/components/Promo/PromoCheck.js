@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from 'react';
 import styled from 'styled-components';
 import { PromoContext } from '../../context';
 import env from '../../env.json';
@@ -71,25 +77,53 @@ const PromoCheck = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  const toggleCheck = () => {
+  const toggleCheck = useCallback(() => {
     const newCheck = !checkRef.current.checked;
     setIsChecked(newCheck);
     checkRef.current.checked = newCheck;
-  };
+    validate(checkRef.current);
+  }, [checkRef, validate]);
 
-  const handleSetCheckByEnter = e => e.key === 'Enter' && toggleCheck();
+  // const handleSetCheckByEnter = e => {
+  //   console.log('e.key: ', e.key);
+  //   e.stopPropagation();
+  //   e.key === 'Enter' && toggleCheck();
+  // };
 
-  const handleCheckWhenFocus = () => {
-    setIsFocused(true);
-    document.addEventListener('keyup', handleSetCheckByEnter);
-  };
+  const handleCheckWhenFocus = () => setIsFocused(true);
 
-  const handleCheckWhenBlur = () => {
-    setIsFocused(false);
-    document.removeEventListener('keyup', handleSetCheckByEnter);
-  };
+  const handleCheckWhenBlur = () => setIsFocused(false);
 
-  useEffect(() => validate(checkRef.current), [validate, checkRef]);
+  // const handleSetCheckByEnter = useCallback(
+  //   e => {
+  //     // const check = checkRef.current;
+  //     if (e.key === 'Enter') {
+  //       // const newCheck = !check.checked;
+  //       // setIsChecked(newCheck);
+  //       // check.checked = newCheck;
+  //       toggleCheck();
+  //     }
+  //     // validate(check);
+  //   },
+  //   [toggleCheck],
+  // );
+
+  // useEffect(() => validate(checkRef.current), [validate, checkRef]);
+
+  useEffect(() => {
+    const setCheckByEnter = e => {
+      if (e.key === 'Enter') toggleCheck();
+    };
+
+    if (isFocused) {
+      document.addEventListener('keyup', setCheckByEnter);
+    } else {
+      document.removeEventListener('keyup', setCheckByEnter);
+    }
+
+    validate(checkRef.current);
+    return () => document.removeEventListener('keyup', setCheckByEnter);
+  }, [isFocused, toggleCheck, validate, checkRef]);
 
   return (
     <Label htmlFor="promo-check">
@@ -98,15 +132,19 @@ const PromoCheck = () => {
         type="checkbox"
         form="promo-form"
         name="promo-check"
-        tabIndex="13"
-        onFocus={handleCheckWhenFocus}
-        onBlur={handleCheckWhenBlur}
+        // tabIndex="13"
+        // onFocus={handleCheckWhenFocus}
+        // onBlur={handleCheckWhenBlur}
       />
       <Agree>
         <CheckField
           isChecked={isChecked}
           isFocused={isFocused}
-          onClick={toggleCheck}>
+          onClick={toggleCheck}
+          onFocus={handleCheckWhenFocus}
+          onBlur={handleCheckWhenBlur}
+          tabIndex="13"
+          data-tab="13">
           <CheckIcon name="Согласен" />
         </CheckField>
         <span>Согласие на обработку персональных данных</span>

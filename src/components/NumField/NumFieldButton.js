@@ -80,6 +80,7 @@ const NumFieldButton = ({ value, area, phone, tabs }) => {
       styles={styles}
       area={area}
       tabIndex={tabs}
+      data-tab={tabs}
       onClick={handleNumButton}>
       {value}
     </Button>

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
 import { PromoContextProvider } from '../../context';
 import promoBack from '../../img/promo.webp';
+import TabByArrow from '../../helpers/TabByArrow';
 
 import CloseButton from './CloseButton';
 import QrImg from '../Styled/QrImg';
@@ -30,9 +31,34 @@ const PromoWrapper = styled.div`
 `;
 
 const Promo = () => {
+  const promoRef = useRef(null);
+
+  useEffect(() => {
+    const list = document.querySelectorAll('[data-tab]');
+    const ArrowsTab = new TabByArrow(list);
+    const promo = promoRef.current;
+
+    const handleTabByArrow = e => {
+      const arrows = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+      if (arrows.includes(e.key)) ArrowsTab.handleFocus(e.key);
+    };
+
+    document.addEventListener('keyup', handleTabByArrow);
+
+    const handleClick = e => {
+      ArrowsTab.setIndex(e.target);
+    };
+    promo.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('keyup', handleTabByArrow);
+      promo.removeEventListener('keyup', handleClick);
+    };
+  }, [promoRef]);
+
   return (
     <PromoContextProvider>
-      <Container>
+      <Container ref={promoRef}>
         <PromoWrapper>
           <PromoField />
         </PromoWrapper>

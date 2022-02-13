@@ -54,6 +54,7 @@ const CloseButton = () => {
     <Close
       to="/"
       tabIndex="15"
+      data-tab="15"
       success={status === 'success' ? 'true' : undefined}>
       <CrossIcon />
     </Close>
