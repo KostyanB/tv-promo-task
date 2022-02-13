@@ -34,21 +34,21 @@ const NumFieldButton = ({ value, area, phone, tabs }) => {
     document.dispatchEvent(event);
   };
 
-  const chekSym = sym => [' ', '-', ')'].includes(sym);
+  const chekSymbol = sym => [' ', '-', ')'].includes(sym);
 
-  const createNewValue = val => {
-    let i = 1;
-    let last = val.at(-i);
+  const createNewValue = string => {
+    let index = 1;
+    let lastSymbol = string.at(-index);
 
-    while (chekSym(last)) {
-      i++;
-      last = val.at(-i);
+    while (chekSymbol(lastSymbol)) {
+      index++;
+      lastSymbol = string.at(-index);
     }
 
-    return val.slice(0, val.length - i);
+    return string.slice(0, string.length - index);
   };
 
-  const delSymFromInput = input => {
+  const deleteSymbolFromInput = input => {
     const currentValue = input.value;
 
     if (!currentValue) return;
@@ -58,7 +58,7 @@ const NumFieldButton = ({ value, area, phone, tabs }) => {
     generateInputEvent(newValue);
   };
 
-  const addSymToInput = input => {
+  const addSymbolToInput = input => {
     !input.value && generateInputEvent();
 
     input.value += value;
@@ -68,9 +68,9 @@ const NumFieldButton = ({ value, area, phone, tabs }) => {
   const handleNumButton = () => {
     const input = phone.current;
     if (typeof value === 'number') {
-      addSymToInput(input);
+      addSymbolToInput(input);
     } else {
-      delSymFromInput(input);
+      deleteSymbolFromInput(input);
     }
     validate(input);
   };

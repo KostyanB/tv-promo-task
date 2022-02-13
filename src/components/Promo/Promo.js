@@ -45,14 +45,13 @@ const Promo = () => {
 
     document.addEventListener('keyup', handleTabByArrow);
 
-    const handleClick = e => {
-      ArrowsTab.setIndex(e.target);
-    };
+    const handleClick = e => ArrowsTab.setIndex(e.target);
+
     promo.addEventListener('click', handleClick);
 
     return () => {
       document.removeEventListener('keyup', handleTabByArrow);
-      promo.removeEventListener('keyup', handleClick);
+      promo.removeEventListener('click', handleClick);
     };
   }, [promoRef]);
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import env from '../env.json';
-import maskPhone from '../helpers/maskPhone';
 
 const useValidateInputs = () => {
   const phoneMask = env.phoneMask;

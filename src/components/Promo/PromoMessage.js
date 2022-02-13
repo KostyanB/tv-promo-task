@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { PromoContext } from '../../context';
-
 import env from '../../env.json';
-
 import Text from '../Styled/Text';
 
 const { errorColor, mainTextColor } = env.colors;

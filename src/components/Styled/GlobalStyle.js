@@ -34,9 +34,7 @@ export const GlobalStyle = createGlobalStyle`
         font-display: swap;
     }
     /* reset styles */
-
-
-        /* Document */
+    /* Document */
     html {
         line-height: 1.15;
         -webkit-text-size-adjust: 100%;
@@ -334,13 +332,5 @@ export const GlobalStyle = createGlobalStyle`
         margin: auto;
         /* fix place for scroll */
         /* scrollbar-gutter: stable; */
-        /*
-        * компенсация смещения блоков при анимированном роутинге
-        * из-за одновременного рендеринга 2-х DOM-элементов
-        * в AnimatedRoutes в transition animated.div добавлен
-        * стиль 'grid-area: 1/-1'
-        */
-        /*display: grid;*/
     }
-
 `;

@@ -37,23 +37,18 @@ const maskPhone = (elem, masked = '+7 (___) ___-__-__') => {
   };
 
   const runMask = function (event) {
-    // const keyCode = event.keyCode;
     const keyCode = Number(event.data);
     let index = 0;
 
-    // let newValue = createNewValue(this.value, index);
     let newValue = createNewValue(elem.value, index);
 
     index = newValue.indexOf('_');
 
     if (index !== -1) newValue = newValue.slice(0, index);
 
-    // const regExp = createRegExp(this.value);
     const regExp = createRegExp(elem.value);
 
-    // this.value = checkCurrentValue(this.value, regExp, newValue, keyCode);
     elem.value = checkCurrentValue(elem.value, regExp, newValue, keyCode);
-    // this.value = checkBlur(this.value, event);
     elem.value = checkBlur(elem.value, event);
   };
 

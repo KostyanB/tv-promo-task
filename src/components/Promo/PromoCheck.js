@@ -26,12 +26,11 @@ const Label = styled.label`
   cursor: default !important;
 
   & > input {
+    grid-area: 1/-1;
+    place-self: start;
     width: 40px;
     height: 40px;
     z-index: -5;
-
-    grid-area: 1/-1;
-    place-self: start;
   }
 `;
 const Agree = styled.div`
@@ -84,31 +83,9 @@ const PromoCheck = () => {
     validate(checkRef.current);
   }, [checkRef, validate]);
 
-  // const handleSetCheckByEnter = e => {
-  //   console.log('e.key: ', e.key);
-  //   e.stopPropagation();
-  //   e.key === 'Enter' && toggleCheck();
-  // };
-
   const handleCheckWhenFocus = () => setIsFocused(true);
 
   const handleCheckWhenBlur = () => setIsFocused(false);
-
-  // const handleSetCheckByEnter = useCallback(
-  //   e => {
-  //     // const check = checkRef.current;
-  //     if (e.key === 'Enter') {
-  //       // const newCheck = !check.checked;
-  //       // setIsChecked(newCheck);
-  //       // check.checked = newCheck;
-  //       toggleCheck();
-  //     }
-  //     // validate(check);
-  //   },
-  //   [toggleCheck],
-  // );
-
-  // useEffect(() => validate(checkRef.current), [validate, checkRef]);
 
   useEffect(() => {
     const setCheckByEnter = e => {
@@ -122,6 +99,7 @@ const PromoCheck = () => {
     }
 
     validate(checkRef.current);
+
     return () => document.removeEventListener('keyup', setCheckByEnter);
   }, [isFocused, toggleCheck, validate, checkRef]);
 
@@ -132,9 +110,6 @@ const PromoCheck = () => {
         type="checkbox"
         form="promo-form"
         name="promo-check"
-        // tabIndex="13"
-        // onFocus={handleCheckWhenFocus}
-        // onBlur={handleCheckWhenBlur}
       />
       <Agree>
         <CheckField
