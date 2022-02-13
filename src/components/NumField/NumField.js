@@ -16,19 +16,21 @@ const Field = styled.div`
 `;
 
 const NumField = ({ phone }) => {
-  const digArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+  const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const tabIndexes = ['12', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
   return (
     <Field>
-      {digArr.map(item => (
+      {digits.map((item, i) => (
         <NumFieldButton
-          key={item}
+          key={i}
           value={item}
           area={`num${item}`}
           phone={phone}
+          tabs={tabIndexes[i]}
         />
       ))}
-      <NumFieldButton value="СТЕРЕТЬ" area="del" phone={phone} />
+      <NumFieldButton value="СТЕРЕТЬ" area="del" phone={phone} tabs="11" />
     </Field>
   );
 };

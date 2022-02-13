@@ -51,7 +51,10 @@ const CloseButton = () => {
   } = useContext(PromoContext);
 
   return (
-    <Close to="/" success={status === 'success' ? 'true' : undefined}>
+    <Close
+      to="/"
+      tabIndex="15"
+      success={status === 'success' ? 'true' : undefined}>
       <CrossIcon />
     </Close>
   );

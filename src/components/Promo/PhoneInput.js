@@ -55,6 +55,7 @@ const PhoneInput = forwardRef((props, ref) => {
       type="tel"
       name="promo-phone"
       holder={phoneMask}
+      tabIndex="1"
       onChange={handleValidate}
       onBlur={handleValidate}
       onInput={handleValidate}

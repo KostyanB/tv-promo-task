@@ -98,6 +98,7 @@ const PromoCheck = () => {
         type="checkbox"
         form="promo-form"
         name="promo-check"
+        tabIndex="13"
         onFocus={handleCheckWhenFocus}
         onBlur={handleCheckWhenBlur}
       />

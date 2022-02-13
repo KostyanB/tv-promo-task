@@ -28,6 +28,7 @@ const SubmitButton = () => {
       disable={disableSubmit}
       type="submit"
       form="promo-form"
+      tabInbex="14"
       // onClick={handleSubmit}
     >
       ПОДТВЕРДИТЬ НОМЕР

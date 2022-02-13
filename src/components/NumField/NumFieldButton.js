@@ -13,7 +13,7 @@ const {
   numBtnActiveText,
 } = env.colors.numBtnColors;
 
-const NumFieldButton = ({ value, area, phone }) => {
+const NumFieldButton = ({ value, area, phone, tabs }) => {
   const {
     validateInputs: { validate },
   } = useContext(PromoContext);
@@ -76,7 +76,11 @@ const NumFieldButton = ({ value, area, phone }) => {
   };
 
   return (
-    <Button styles={styles} area={area} onClick={handleNumButton}>
+    <Button
+      styles={styles}
+      area={area}
+      tabIndex={tabs}
+      onClick={handleNumButton}>
       {value}
     </Button>
   );
