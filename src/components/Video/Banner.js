@@ -68,13 +68,13 @@ const Button = styled(Link)`
 const Banner = () => {
   const {
     player: { player },
-    startPlayTime: { setStartPlayTime },
+    startPlayTime: { setPause },
     showBanner: { showBanner },
   } = useContext(VideoContext);
 
   const handleBanner = () => {
     const currentTime = player.getCurrentTime();
-    setStartPlayTime(currentTime);
+    setPause(currentTime);
     player.pauseVideo();
   };
 
