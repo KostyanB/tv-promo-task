@@ -1,12 +1,21 @@
 export default class TabByArrow {
   direct;
 
-  constructor(list) {
-    this.elems = [...list].sort((a, b) => +a.dataset.tab - b.dataset.tab);
+  constructor(selector) {
+    this.selector = selector;
+    this.list = document.querySelectorAll(this.selector);
+    this.elems = [...this.list].sort(
+      (a, b) => this.getAttr(a) - this.getAttr(b),
+    );
     this.count = this.elems.length - 1;
     this.index = 0;
     this.prevElem = this.elems[this.count];
     this.nextElem = this.elems[0];
+  }
+
+  getAttr(elem) {
+    const attr = this.selector.slice(1, this.selector.length - 1);
+    return elem.getAttribute(attr);
   }
 
   setIndex(elem) {

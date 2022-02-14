@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
 import { PromoContextProvider } from '../../context';
@@ -33,15 +33,19 @@ const PromoWrapper = styled.div`
 const Promo = () => {
   const promoRef = useRef(null);
 
+  const arrows = useMemo(
+    () => ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'],
+    [],
+  );
+
+  const getArrowsTab = useCallback(attr => new TabByArrow(attr), []);
+
   useEffect(() => {
-    const list = document.querySelectorAll('[data-tab]');
-    const ArrowsTab = new TabByArrow(list);
+    const ArrowsTab = getArrowsTab('[data-tab]');
     const promo = promoRef.current;
 
-    const handleTabByArrow = e => {
-      const arrows = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-      if (arrows.includes(e.key)) ArrowsTab.handleFocus(e.key);
-    };
+    const handleTabByArrow = e =>
+      arrows.includes(e.key) && ArrowsTab.handleFocus(e.key);
 
     document.addEventListener('keyup', handleTabByArrow);
 
@@ -53,7 +57,7 @@ const Promo = () => {
       document.removeEventListener('keyup', handleTabByArrow);
       promo.removeEventListener('click', handleClick);
     };
-  }, [promoRef]);
+  }, [promoRef, arrows, getArrowsTab]);
 
   return (
     <PromoContextProvider>
