@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { VideoContext } from '../../context';
+import { VideoContext, Context } from '../../context';
 import env from '../../env.json';
 import YouTube from 'react-youtube';
 
@@ -11,9 +11,11 @@ const {
 const Player = () => {
   const {
     player: { player, setPlayer },
-    startPlayTime: { startPlayTime },
     showBanner: { setShowBanner },
   } = useContext(VideoContext);
+  const {
+    startPlayTime: { startPlayTime },
+  } = useContext(Context);
 
   const opts = {
     width: '1280',

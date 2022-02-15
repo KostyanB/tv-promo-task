@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { VideoContext } from '../../context';
+import { VideoContext, Context } from '../../context';
 import { Link } from 'react-router-dom';
 
 import env from '../../env.json';
@@ -68,13 +68,15 @@ const Button = styled(Link)`
 const Banner = () => {
   const {
     player: { player },
-    startPlayTime: { setPause },
     showBanner: { showBanner },
   } = useContext(VideoContext);
+  const {
+    startPlayTime: { setStartPlayTime },
+  } = useContext(Context);
 
   const handleBanner = () => {
     const currentTime = player.getCurrentTime();
-    setPause(currentTime);
+    setStartPlayTime(currentTime);
     player.pauseVideo();
   };
 
