@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
+import env from '../../env.json';
 import NumFieldButton from './NumFieldButton';
+
+const phoneMask = env.phoneMask;
 
 const Field = styled.div`
   display: grid;
@@ -15,9 +18,14 @@ const Field = styled.div`
   padding-bottom: 20px;
 `;
 
-const NumField = ({ phone }) => {
+const NumField = () => {
   const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const tabIndexes = ['12', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
+  const prefix = useMemo(
+    () => phoneMask.slice(0, phoneMask.indexOf('_')).replace('(', '').trim(),
+    [],
+  );
 
   return (
     <Field>
@@ -26,11 +34,11 @@ const NumField = ({ phone }) => {
           key={i}
           value={item}
           area={`num${item}`}
-          phone={phone}
           tabs={tabIndexes[i]}
+          prefix={prefix}
         />
       ))}
-      <NumFieldButton value="СТЕРЕТЬ" area="del" phone={phone} tabs="11" />
+      <NumFieldButton value="СТЕРЕТЬ" area="del" tabs="11" />
     </Field>
   );
 };

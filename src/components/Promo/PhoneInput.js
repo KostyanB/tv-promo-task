@@ -1,8 +1,7 @@
-import React, { useEffect, useContext, forwardRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { PromoContext } from '../../context';
 import env from '../../env.json';
-import maskPhone from '../../helpers/maskPhone';
 
 const { mainTextColor, errorColor } = env.colors;
 
@@ -28,31 +27,44 @@ const Input = styled.input.attrs(props => ({
   }
 `;
 
-const PhoneInput = forwardRef((props, ref) => {
+const PhoneInput = () => {
   const phoneMask = env.phoneMask;
+
   const {
     validateInputs: { validate, isValidPhone },
+    maskedPhone: { maskedPhone, setMaskedPhoneValue },
   } = useContext(PromoContext);
+  const inputRef = useRef(null);
 
-  useEffect(() => maskPhone(ref.current, phoneMask), [ref, phoneMask]);
+  useEffect(() => validate(inputRef.current), [inputRef, validate]);
 
-  const handleValidatePhone = () => validate(ref.current);
+  const checkBlur = value => (value.length < 5 ? '' : value);
+
+  const handleMaskedPhone = e => {
+    const newValue =
+      e.type === 'blur'
+        ? checkBlur(inputRef.current.value)
+        : inputRef.current.value;
+
+    setMaskedPhoneValue(newValue);
+  };
 
   return (
     <Input
-      ref={ref}
+      ref={inputRef}
       type="tel"
       name="promo-phone"
       holder={phoneMask}
       tabIndex="1"
       data-tab="1"
-      onChange={handleValidatePhone}
-      onBlur={handleValidatePhone}
-      onInput={handleValidatePhone}
-      className={!isValidPhone && 'novalid'}>
-      {props.children}
-    </Input>
+      onChange={handleMaskedPhone}
+      onBlur={handleMaskedPhone}
+      onInput={handleMaskedPhone}
+      onFocus={handleMaskedPhone}
+      className={!isValidPhone && 'novalid'}
+      value={maskedPhone}
+    />
   );
-});
+};
 
 export default PhoneInput;

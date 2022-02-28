@@ -1,4 +1,4 @@
-import React, { createRef, useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import { PromoContext } from '../../context';
 
 import PhoneInput from './PhoneInput';
@@ -8,7 +8,6 @@ import SubmitButton from './SubmitButton';
 import Text from '../Styled/Text';
 
 const PromoDataField = () => {
-  const phoneRef = createRef();
   const formRef = useRef(null);
   const {
     sendData: { sendData },
@@ -28,10 +27,10 @@ const PromoDataField = () => {
   return (
     <>
       <form id="promo-form" ref={formRef} onSubmit={sendForm}>
-        <PhoneInput ref={phoneRef} />
+        <PhoneInput />
       </form>
       <Text>и с Вами свяжется наш менеждер для дальнейшей консультации</Text>
-      <NumField phone={phoneRef} />
+      <NumField />
       <PromoCheck />
       <SubmitButton />
     </>

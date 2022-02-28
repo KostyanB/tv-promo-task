@@ -24,7 +24,9 @@ const useValidateInputs = () => {
 
   const validatePhone = value => {
     const maskPrefix = getPrefix(phoneMask);
+    console.log('maskPrefix: ', maskPrefix);
     const inputPrefix = getPrefix(value);
+    console.log('inputPrefix: ', inputPrefix);
 
     let num = value;
     const arr = [maskPrefix, ' ', '(', ')', '-'];

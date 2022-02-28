@@ -13,10 +13,11 @@ const {
   numBtnActiveText,
 } = env.colors.numBtnColors;
 
-const NumFieldButton = ({ value, area, phone, tabs }) => {
+const NumFieldButton = ({ value, area, tabs, prefix }) => {
   const {
-    validateInputs: { validate },
+    maskedPhone: { maskedPhone, setMaskedPhoneValue },
   } = useContext(PromoContext);
+
   const styles = {
     btnBack: numBtnBack,
     btnBorder: numBtnBorder,
@@ -25,13 +26,6 @@ const NumFieldButton = ({ value, area, phone, tabs }) => {
     btnHoverBorder: numBtnHoverBorder,
     btnHoverText: numBtnHoverText,
     btnActiveText: numBtnActiveText,
-  };
-
-  const generateInputEvent = (dataValue = '') => {
-    const event = new InputEvent('addNum', {
-      data: dataValue,
-    });
-    document.dispatchEvent(event);
   };
 
   const chekSymbol = sym => [' ', '-', ')'].includes(sym);
@@ -48,31 +42,24 @@ const NumFieldButton = ({ value, area, phone, tabs }) => {
     return string.slice(0, string.length - index);
   };
 
-  const deleteSymbolFromInput = input => {
-    const currentValue = input.value;
+  const deleteSymbolFromInput = () => {
+    if (!maskedPhone) return;
 
-    if (!currentValue) return;
-
-    const newValue = createNewValue(currentValue);
-    input.value = newValue;
-    generateInputEvent(newValue);
+    const newValue = createNewValue(maskedPhone);
+    setMaskedPhoneValue(newValue);
   };
 
-  const addSymbolToInput = input => {
-    !input.value && generateInputEvent();
-
-    input.value += value;
-    generateInputEvent(value.toString());
+  const addSymbolToInput = () => {
+    const newValue = maskedPhone ? maskedPhone + value : prefix + value;
+    setMaskedPhoneValue(newValue);
   };
 
   const handleNumButton = () => {
-    const input = phone.current;
     if (typeof value === 'number') {
-      addSymbolToInput(input);
+      addSymbolToInput();
     } else {
-      deleteSymbolFromInput(input);
+      deleteSymbolFromInput();
     }
-    validate(input);
   };
 
   return (
