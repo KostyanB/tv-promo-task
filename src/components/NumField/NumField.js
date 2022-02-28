@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import env from '../../env.json';
+import getPrefix from '../../helpers/getPrefix';
 import NumFieldButton from './NumFieldButton';
 
 const phoneMask = env.phoneMask;
@@ -22,10 +23,7 @@ const NumField = () => {
   const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   const tabIndexes = ['12', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  const prefix = useMemo(
-    () => phoneMask.slice(0, phoneMask.indexOf('_')).replace('(', '').trim(),
-    [],
-  );
+  const prefix = useMemo(() => getPrefix(phoneMask), []);
 
   return (
     <Field>
